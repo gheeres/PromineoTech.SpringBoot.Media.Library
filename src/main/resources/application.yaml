@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    username: media
+    password: media
+    url: jdbc:mysql://localhost:3306/media
+  
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    defer-datasource-initialization: true  
+  
+  sql:
+    init: 
+      mode: always
+
+springdoc:
+  swagger-ui:
+    path: /
