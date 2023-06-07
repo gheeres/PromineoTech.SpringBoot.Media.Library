@@ -20,11 +20,11 @@ import lombok.Data;
 public class ActorModel {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long actor_id;
-  private Date actor_birthdate;
-  private String actor_lastname;
-  private String actor_firstname;
-  private String actor_description;
+  private Long actorId;
+  private Date actorBirthdate;
+  private String actorLastname;
+  private String actorFirstname;
+  private String actorDescription;
 
   @ManyToMany(cascade = CascadeType.PERSIST)
   @JoinTable(name = "episode_actor",

@@ -17,9 +17,9 @@ import lombok.Data;
 public class ShowModel {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long show_id;
-  private String show_name;
-  private String show_description;
+  private Long showId;
+  private String showName;
+  private String showDescription;
 
   @OneToMany(mappedBy = "show", cascade = CascadeType.ALL)
   private Set<EpisodeModel> episodes = new HashSet<>();

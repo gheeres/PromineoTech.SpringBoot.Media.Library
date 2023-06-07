@@ -2,8 +2,8 @@ package media.libary.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import media.libary.repository.model.ShowModel;
+import media.libary.repository.model.ActorModel;
 
 @Repository
-public interface ShowRepository extends JpaRepository<ShowModel,Long> {
+public interface ActorRepository extends JpaRepository<ActorModel,Long> {
 }

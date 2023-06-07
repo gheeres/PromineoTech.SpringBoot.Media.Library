@@ -16,14 +16,14 @@ import lombok.Data;
 public class EpisodeModel {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long episode_id;
+  private Long episodeId;
   
   @ManyToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "show_id", nullable = false)
   private ShowModel show;
   
-  private Long episode_season;
-  private Long episode_episode;
-  private String episode_name;
-  private String episode_description;
+  private Long episodeSeason;
+  private Long episodeEpisode;
+  private String episodeName;
+  private String episodeDescription;
 }
