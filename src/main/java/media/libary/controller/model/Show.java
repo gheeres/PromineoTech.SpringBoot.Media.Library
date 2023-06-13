@@ -2,6 +2,7 @@ package media.libary.controller.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import media.libary.Model;
 
 @Data
 @NoArgsConstructor

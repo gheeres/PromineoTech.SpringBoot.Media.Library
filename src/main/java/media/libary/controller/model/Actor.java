@@ -1,11 +1,12 @@
 package media.libary.controller.model;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import media.libary.Model;
 
 @Data
 @NoArgsConstructor

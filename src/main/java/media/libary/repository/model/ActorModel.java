@@ -13,23 +13,22 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import media.libary.Model;
 
 @Data
-@NoArgsConstructor
 @Entity
-@Table(name="actor")
-public class ActorModel {
+@Table(name = "actor")
+public class ActorModel extends Model {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long actor_id;
-  private Date actor_birthdate;
-  private String actor_name;
-  private String actor_description;
+  private Long actorId;
+  private Date actorBirthdate;
+  private String actorLastname;
+  private String actorFirstname;
+  private String actorDescription;
 
   @ManyToMany(cascade = CascadeType.PERSIST)
-  @JoinTable(name = "episode_actor", 
-             joinColumns = @JoinColumn(name = "actor_id"), 
-             inverseJoinColumns = @JoinColumn(name = "episode_id"))
+  @JoinTable(name = "episode_actor", joinColumns = @JoinColumn(name = "actor_id"),
+      inverseJoinColumns = @JoinColumn(name = "episode_id"))
   private Set<EpisodeModel> episodes = new HashSet<>();
 }

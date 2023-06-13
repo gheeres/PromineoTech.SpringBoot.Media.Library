@@ -1,4 +1,4 @@
-package media.libary.controller.model;
+package media.libary;
 
 public interface JsonSerializable {
   /**

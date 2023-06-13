@@ -1,0 +1,39 @@
+package media.libary.controller.error;
+
+import java.util.Map;
+import java.util.NoSuchElementException;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.context.request.ServletWebRequest;
+import org.springframework.web.context.request.WebRequest;
+import lombok.extern.slf4j.Slf4j;
+import media.libary.exception.ShowNotFoundException;
+
+@Slf4j
+@RestControllerAdvice
+public class GlobalControllerErrorHandler {
+  @ExceptionHandler(NoSuchElementException.class)
+  @ResponseStatus(code = HttpStatus.NOT_FOUND)
+  public Map<String,String> handleNoSuchElementException(NoSuchElementException ex, WebRequest webRequest) {
+    String message = ex.toString();
+    log.info("Url: {}; Message: {}", getRequestUri(webRequest), message);
+    return Map.of("message", message);
+  }
+  
+  @ExceptionHandler(ShowNotFoundException.class)
+  @ResponseStatus(code = HttpStatus.NOT_FOUND)
+  public Map<String,String> handleShowNotFoundException(ShowNotFoundException ex, WebRequest webRequest) {
+    String message = ex.toString();
+    log.info("Url: {}; Message: {}", getRequestUri(webRequest), message);
+    return Map.of("message", message);
+  }
+
+  private String getRequestUri(WebRequest webRequest) {
+    if (webRequest instanceof ServletWebRequest swr) {
+      return swr.getRequest().getRequestURI();
+    }
+    return null;
+  }
+}
