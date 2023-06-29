@@ -3,13 +3,16 @@ package media.libary.service;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import media.libary.controller.model.CreateShowInput;
+import media.libary.controller.model.Episode;
 import media.libary.controller.model.Show;
+import media.libary.controller.model.ShowSearchInput;
 import media.libary.exception.InvalidInputException;
 import media.libary.exception.SaveException;
 import media.libary.exception.ShowNotFoundException;
 import media.libary.repository.ActorRepository;
 import media.libary.repository.EpisodeRepository;
 import media.libary.repository.ShowRepository;
+import media.libary.repository.model.EpisodeModel;
 import media.libary.repository.model.ShowModel;
 
 @Service
@@ -69,5 +72,27 @@ public class MediaService {
       throw new ShowNotFoundException(showId);
     });
     return Convert.toShow(model);
+  }
+
+  public List<Show> findShows(ShowSearchInput input) {
+    if (input == null) {
+      return getAllShows();
+    }
+    
+    List<ShowModel> models = showRepository.findByName(input.getName());
+    return models.stream()
+                 .map(m -> Convert.toShow(m))
+                 .toList();
+  }
+
+  public List<Episode> getAllEpisodesForShow(Long showId) {
+    ShowModel model = showRepository.findById(showId).orElseThrow(() -> {
+      throw new ShowNotFoundException(showId);
+    });
+    
+    List<EpisodeModel> models = episodeRepository.findAllByShowShowId(showId);
+    return models.stream()
+                 .map((e) -> Convert.toEpisode(e))
+                 .toList();
   }
 }
