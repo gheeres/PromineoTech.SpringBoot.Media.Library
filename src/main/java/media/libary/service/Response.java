@@ -20,7 +20,19 @@ public class Response<T> {
     return new Response<T>(200, null, result);
   }
   
+  public static <T> Response<T> NotFound(String message) {
+    return new Response<T>(404, message, null);
+  }
+  
   public static <T> Response<T> Error(String message) {
     return new Response<T>(500, message, null);
-  }  
+  } 
+  
+  /**
+   * Checks to see if the response is successful or not.
+   * @return True if successful, false if otherwise.
+   */
+  public boolean isSuccessStatusCode() {
+    return code >= 200 && code < 300;
+  }
 }
