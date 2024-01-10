@@ -1,5 +1,10 @@
 package media.libary.service;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
 public class Response<T> {
   private int code;
   private String message;
@@ -19,4 +24,11 @@ public class Response<T> {
     return new Response(code, null, message);
   }
   
+  /**
+   * Checks to see if the status code indicates a successful response.
+   * @return True if successful, false if otherwise.
+   */
+  public boolean isSuccessStatusCode() {
+    return (code >= 200 && code < 300);
+  }
 }
