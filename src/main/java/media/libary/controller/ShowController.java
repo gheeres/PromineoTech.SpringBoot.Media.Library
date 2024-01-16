@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
+import media.libary.controller.model.Actor;
 import media.libary.controller.model.CreateShowInput;
 import media.libary.controller.model.Image;
 import media.libary.controller.model.ModifyShowInput;
@@ -61,6 +62,13 @@ public class ShowController {
     log.info("Receieved request to get show {}", showId);
 
     return service.getShow(showId);
+  }
+
+  @GetMapping(value = "{showId}/actors")
+  public List<Actor> getActors(@PathVariable Long showId) {
+    log.info("Receieved request to get actors for show {}", showId);
+
+    return service.getAllActorsForShow(showId);
   }
 
   @PostMapping("")

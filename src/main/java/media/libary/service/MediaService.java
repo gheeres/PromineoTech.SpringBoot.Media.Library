@@ -152,7 +152,7 @@ public class MediaService {
       throw new ShowNotFoundException(showId);
     });
     
-    List<EpisodeModel> episodes = episodeRepository.findAllByShowShowId(showId);
+    List<EpisodeModel> episodes = episodeRepository.findAllByShowShowId(show.getShowId());
     return episodes.stream().map(e -> {
       return Convert.toEpisode(e);
     }).toList();
@@ -163,7 +163,7 @@ public class MediaService {
       throw new ShowNotFoundException(showId);
     });
 
-    List<EpisodeModel> episodes = episodeRepository.findAllByShowShowIdAndEpisodeSeason(showId, season);
+    List<EpisodeModel> episodes = episodeRepository.findAllByShowShowIdAndEpisodeSeason(show.getShowId(), season);
     return episodes.stream().map(e -> {
       return Convert.toEpisode(e);
     }).toList();
@@ -185,7 +185,7 @@ public class MediaService {
       throw new ShowNotFoundException(showId);
     });
 
-    EpisodeModel episode = episodeRepository.findByShowShowIdAndEpisodeSeasonAndEpisodeEpisode(showId, season, episodeNumber);
+    EpisodeModel episode = episodeRepository.findByShowShowIdAndEpisodeSeasonAndEpisodeEpisode(show.getShowId(), season, episodeNumber);
     return Convert.toEpisode(episode);
   }
 
@@ -194,7 +194,7 @@ public class MediaService {
       throw new ShowNotFoundException(showId);
     });
 
-    List<EpisodeModel> episodes = episodeRepository.findAllByShowShowIdAndEpisodeSeason(showId, season);
+    List<EpisodeModel> episodes = episodeRepository.findAllByShowShowIdAndEpisodeSeason(show.getShowId(), season);
     return episodes.stream().map(e -> {
       return Convert.toEpisode(e);
     }).toList();
@@ -207,6 +207,17 @@ public class MediaService {
     }).toList();
   }
   
+  public List<Actor> getAllActorsForShow(Long showId) {
+    ShowModel show = showRepository.findById(showId).orElseThrow(() -> {
+      throw new ShowNotFoundException(showId);
+    });
+    
+    List<ActorModel> actors = actorRepository.findAllByShowId(show.getShowId());
+    return actors.stream().map(e -> {
+      return Convert.toActor(e, false);
+    }).toList();
+  }
+
   public List<Actor> findActors(ActorSearchInput input) {
     if (input == null) {
       return getAllActors();
