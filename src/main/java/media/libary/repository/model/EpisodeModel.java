@@ -15,11 +15,15 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import media.libary.Model;
 
 @Data
 @Entity
 @Table(name = "episode")
+@ToString(exclude = "actors")
+@EqualsAndHashCode(callSuper=false, exclude = "actors")
 public class EpisodeModel extends Model {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,6 +41,6 @@ public class EpisodeModel extends Model {
   @Fetch(FetchMode.SUBSELECT)
   @ManyToMany(cascade = CascadeType.PERSIST)
   @JoinTable(name = "episode_actor", joinColumns = @JoinColumn(name = "episode_id"),
-      inverseJoinColumns = @JoinColumn(name = "actor_id"))
+             inverseJoinColumns = @JoinColumn(name = "actor_id"))
   private Set<ActorModel> actors = new HashSet<>();
 }
