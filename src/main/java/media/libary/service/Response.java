@@ -24,6 +24,10 @@ public class Response<T> {
     return new Response<T>(404, message, null);
   }
   
+  public static <T> Response<T> BadRequest(String message) {
+    return new Response<T>(400, message, null);
+  }
+
   public static <T> Response<T> Error(String message) {
     return new Response<T>(500, message, null);
   } 
