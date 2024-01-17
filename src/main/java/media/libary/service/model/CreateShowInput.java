@@ -1,5 +1,6 @@
 package media.libary.service.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,6 +10,7 @@ public class CreateShowInput extends Model {
   private String show_name;
   private String show_description;
   
+  @JsonIgnore
   public boolean isValid() {
     return (show_name != null) && (! show_name.isEmpty());
   }

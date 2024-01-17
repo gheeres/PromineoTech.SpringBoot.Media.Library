@@ -2,6 +2,7 @@ package media.libary.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.stereotype.Service;
 import media.libary.repository.ActorRepository;
 import media.libary.repository.EpisodeRepository;
@@ -35,6 +36,7 @@ public class MediaService {
     result.setId(model.getShow_id());
     result.setName(model.getShow_name());
     result.setDescription(model.getShow_description());
+    result.setRating(model.getShow_rating());
     return result;
   }
   
@@ -64,6 +66,36 @@ public class MediaService {
     
     return shows.stream().map(m -> {
       return toShow(m);
+    }).toList();
+  }
+
+  /**
+   * Applies a rating to a show.
+   * @param showId The unique show id.
+   * @param rating A value from 0 - 5, with 0 being the lowest.
+   * @param comment An optional comment associated with the rating.
+   * @return A response indicating the results of the operation.
+   */
+  public Response<Show> rateShow(Long showId, Double rating, String comment) {
+    Optional<ShowModel> existing = this.showRepository.findById(showId);
+    if (existing.isPresent()) {
+      ShowModel model = existing.get();
+      model.setShow_rating(rating);
+      model.setShow_comment(comment);
+
+      ShowModel result = this.showRepository.save(model);
+      if (result != null) {
+        return Response.OK(toShow(result));
+      }
+      return Response.InternalServerError("Apply ratings to show failed due to an unhandled error.");
+    }
+    return Response.NotFound("Requested show was not found.");
+  }
+
+  public List<Show> getAllShowsWithRating(Double rating_min, Double rating_max) {
+    List<ShowModel> shows = this.showRepository.getShowsByRating(rating_min, rating_max);
+    return shows.stream().map((show) -> {
+      return toShow(show);
     }).toList();
   }
 }

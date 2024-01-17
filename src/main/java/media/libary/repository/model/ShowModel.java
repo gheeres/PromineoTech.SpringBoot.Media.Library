@@ -25,6 +25,8 @@ public class ShowModel {
   private Long show_id;
   private String show_name;
   private String show_description;
+  private Double show_rating;
+  private String show_comment;
   
   @ManyToMany(cascade = CascadeType.PERSIST)
   @JoinTable(name = "episode_actor",

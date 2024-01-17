@@ -20,6 +20,14 @@ public class Response<T> {
     return new Response(200, result, null);
   }
   
+  public static <T> Response<T> NotFound(String message) {
+    return new Response(404, null, message);
+  }
+
+  public static <T> Response<T> InternalServerError(String message) {
+    return new Response(500, null, message);
+  }
+
   public static <T> Response<T> Error(int code, String message) {
     return new Response(code, null, message);
   }
