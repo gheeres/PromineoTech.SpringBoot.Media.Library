@@ -4,12 +4,14 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -27,6 +29,11 @@ public class ActorModel extends Model {
   private String actorLastname;
   private String actorFirstname;
   private String actorDescription;
+  
+  private String photoMediaType;
+  @Lob
+  @Column(columnDefinition = "LONGBLOB")
+  private byte[] photo;
   
   @ManyToMany(cascade = CascadeType.PERSIST)
   @JoinTable(name = "episode_actor", joinColumns = @JoinColumn(name = "actor_id"),

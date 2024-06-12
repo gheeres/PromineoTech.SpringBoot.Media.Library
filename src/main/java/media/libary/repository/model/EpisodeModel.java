@@ -28,8 +28,8 @@ public class EpisodeModel extends Model {
   @JoinColumn(name="show_id", nullable = false)
   private ShowModel show;
   
-  private Long seasonNumber;
-  private Long episodeNumber;
+  private Long episodeSeason;
+  private Long episodeEpisode;
   private String episodeName;
   private String episodeDescription;
   
