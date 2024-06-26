@@ -6,13 +6,13 @@ spring:
   
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
     show-sql: true
     defer-datasource-initialization: true  
   
   sql:
     init: 
-      mode: always
+      mode: 
 
 springdoc:
   swagger-ui:
