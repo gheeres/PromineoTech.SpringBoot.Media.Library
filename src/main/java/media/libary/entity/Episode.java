@@ -26,9 +26,13 @@ public class Episode extends Entity {
   @Column(name = "episode_id")
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+  @Column(name = "episode_season")
   private Long season;
+  @Column(name = "episode_episode")
   private Long number;
+  @Column(name = "episode_name")
   private String name;
+  @Column(name = "episode_description")
   private String description;
   
   @ManyToOne(cascade = CascadeType.ALL)
