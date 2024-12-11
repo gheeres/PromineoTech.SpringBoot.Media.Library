@@ -1,0 +1,26 @@
+package media.libary.service;
+
+import java.util.List;
+import org.springframework.stereotype.Service;
+import media.libary.repository.ActorRepository;
+import media.libary.repository.EpisodeRepository;
+import media.libary.repository.ShowRepository;
+import media.libary.repository.models.ShowModel;
+
+@Service
+public class DefaultMediaService implements MediaService {
+  private ActorRepository actorRepository;
+  private EpisodeRepository episodeRepository;
+  private ShowRepository showRepository;
+
+  public DefaultMediaService(ActorRepository actorRepository, EpisodeRepository episodeRepository, ShowRepository showRepository) {
+    this.actorRepository = actorRepository;
+    this.episodeRepository = episodeRepository;
+    this.showRepository = showRepository;
+  }
+  
+  public List<ShowModel> getAllShows() {
+    List<ShowModel> shows = showRepository.findAll();
+    return shows;
+  }
+}
