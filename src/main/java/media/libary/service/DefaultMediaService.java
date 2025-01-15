@@ -39,4 +39,17 @@ public class DefaultMediaService implements MediaService {
     List<ShowModel> shows = showRepository.findByShowName(name);
     return shows;
   }
+
+  @Override
+  public byte[] setDefaultShowPoster(Long showId, byte[] image) {
+    ShowModel show = getShowById(showId);
+    if (show != null) {
+      show.setPoster(image);
+      ShowModel result = showRepository.save(show);
+      if (result != null) {
+        return result.getPoster();
+      }
+    }
+    return null;
+  }
 }

@@ -23,5 +23,13 @@ public interface MediaService {
    * @return The shows that match if any, otherwise an empty list.
    */
   List<ShowModel> searchShows(String name);
+  
+  /**
+   * Updates or sets the poster image for a show.
+   * @param showId The unique id of the show.
+   * @param image The image.
+   * @return The image.
+   */
+  byte[] setDefaultShowPoster(Long showId, byte[] image);
 }
  
